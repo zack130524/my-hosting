@@ -1,0 +1,483 @@
+/* Configuraciones generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #0b0204;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', sans-serif;
+    overflow-x: hidden;
+}
+
+/* --- ESTILOS DE LA PANTALLA DE BLOQUEO --- */
+#pantalla-bloqueo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle, #20050a 0%, #050102 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    transition: opacity 1s ease-out, visibility 1s;
+}
+
+.contenedor-escaner {
+    text-align: center;
+}
+
+#titulo-bloqueo {
+    font-size: 2rem;
+    font-weight: 300;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+}
+
+#circulo-huella {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 30px auto;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: all 0.3s ease;
+}
+
+.icono-huella {
+    font-size: 50px;
+    filter: grayscale(100%) brightness(1.5);
+}
+
+.onda-pulso {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 2px solid #ff2a4b;
+    border-radius: 50%;
+    animation: latido 2s infinite;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@keyframes latido {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.6);
+        opacity: 0;
+    }
+}
+
+#mensaje-guia {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- CLASES DE CONTROL Y PANTALLA PRINCIPAL --- */
+.oculto {
+    display: none !important;
+}
+
+#contenido-principal {
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    background: linear-gradient(180deg, #120306 0%, #290810 100%);
+    padding: 40px 20px;
+    text-align: center;
+    z-index: 2;
+}
+
+.encabezado-historia h1 {
+    font-size: 2.8rem;
+    color: #ff2a4b;
+    margin-bottom: 5px;
+    letter-spacing: 3px;
+}
+
+.encabezado-historia h2 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 40px;
+}
+
+/* Diseño del contador */
+.seccion-contador h3 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 20px;
+}
+
+.bloques-tiempo {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+.bloque {
+    background-color: rgba(18, 3, 6, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 80px;
+    flex: 1;
+}
+
+.bloque span {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.bloque p {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+}
+
+/* --- SECCIÓN GALERÍA POLAROID --- */
+.seccion-memorias {
+    margin-top: 60px;
+    position: relative;
+    z-index: 10;
+    padding: 0 10px;
+}
+
+.titulo-seccion {
+    font-size: 1.5rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 30px;
+}
+
+.cuadrilla-fotos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.tarjeta-polaroid {
+    background-color: #ffffff;
+    padding: 12px 12px 24px 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    transform: rotate(2deg); 
+}
+
+.tarjeta-polaroid:nth-child(even) {
+    transform: rotate(-2deg);
+}
+
+.tarjeta-polaroid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+.pie-foto {
+    margin-top: 15px;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    color: #333333;
+    font-style: italic;
+}
+
+.tarjeta-polaroid:hover {
+    transform: scale(1.05) rotate(0deg) !important;
+    box-shadow: 0 12px 24px rgba(255, 42, 75, 0.3);
+    z-index: 20;
+}
+
+/* --- SECCIÓN LÍNEA DEL TIEMPO --- */
+.seccion-linea-tiempo {
+    margin-top: 80px;
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 10;
+    padding: 0 15px;
+}
+
+.linea-vertical {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+.linea-vertical::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    background-color: rgba(255, 255, 255, 0.15);
+    top: 0;
+    bottom: 0;
+    left: 20px;
+}
+
+.hito-tiempo {
+    position: relative;
+    margin-bottom: 40px;
+    padding-left: 50px;
+    text-align: left;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: aparecerHito 0.8s ease forwards;
+}
+
+.hito-tiempo:nth-child(1) { animation-delay: 0.2s; }
+.hito-tiempo:nth-child(2) { animation-delay: 0.5s; }
+.hito-tiempo:nth-child(3) { animation-delay: 0.8s; }
+
+@keyframes aparecerHito {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.punto-nodo {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background-color: #ff2a4b;
+    border: 3px solid #120306;
+    border-radius: 50%;
+    left: 14px;
+    top: 6px;
+    z-index: 2;
+    box-shadow: 0 0 8px #ff2a4b;
+}
+
+.contenido-hito {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: border 0.3s ease;
+}
+
+.contenido-hito:hover {
+    border-color: rgba(255, 42, 75, 0.4);
+}
+
+.fecha-hito {
+    display: block;
+    font-size: 0.8rem;
+    color: #ff2a4b;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.contenido-hito h4 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin-bottom: 8px;
+    font-weight: 400;
+}
+
+.contenido-hito p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.5;
+}
+
+/* --- SECCIÓN CARTA INTERACTIVA --- */
+.seccion-carta {
+    margin-top: 60px;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 10;
+}
+
+.contenedor-sobre {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    background-color: #c92c43; 
+    margin: 40px auto 0 auto;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+}
+
+.cuerpo-sobre {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 100px solid #de354e; 
+    border-top: 100px solid transparent;
+    z-index: 3;
+    border-radius: 0 0 10px 10px;
+}
+
+.solapa-superior {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-top: 100px solid #a81e32; 
+    border-bottom: 0 solid transparent;
+    z-index: 4;
+    transform-origin: top;
+    transition: transform 0.4s ease, z-index 0.2s;
+}
+
+.sello-corazon {
+    position: absolute;
+    top: 85px;
+    left: 135px;
+    width: 30px;
+    height: 30px;
+    background-color: #ffffff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    z-index: 5;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+}
+
+.hoja-carta {
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    width: 270px;
+    height: 180px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 2; 
+    transition: transform 0.6s ease, height 0.6s ease;
+    overflow: hidden;
+}
+
+.texto-carta {
+    font-family: 'Georgia', serif;
+    font-size: 0.65rem; 
+    color: #333333;
+    text-align: left;
+    line-height: 1.4;
+}
+
+.contenedor-sobre.abierto .solapa-superior {
+    transform: rotateX(180deg);
+    z-index: 1; 
+}
+
+.contenedor-sobre.abierto .hoja-carta {
+    transform: translateY(-130px);
+    height: 320px; 
+    z-index: 4; 
+    overflow-y: auto; 
+}
+
+.contenedor-sobre.abierto .sello-corazon {
+    transform: scale(0);
+}
+
+/* --- EFECTO: LLUVIA DE PÉTALOS --- */
+#contenedor-petalos {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 5; 
+    overflow: hidden;
+}
+
+.petalo {
+    position: absolute;
+    display: block;
+    border-radius: 15% 70% 15% 70%;
+    animation: caer linear infinite;
+}
+
+@keyframes caer {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg) rotateY(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.8;
+    }
+    90% {
+        opacity: 0.8;
+    }
+    100% {
+        top: 110%;
+        transform: translateX(80px) rotate(360deg) rotateY(180deg);
+        opacity: 0;
+    }
+}
+
+/* Media Query para pantallas grandes */
+@media (min-width: 768px) {
+    .linea-vertical::after {
+        left: 50%;
+        margin-left: -1px;
+    }
+    .hito-tiempo {
+        width: 50%;
+        padding-left: 0;
+        margin-bottom: 50px;
+    }
+    .hito-tiempo:nth-child(odd) {
+        left: 0;
+        padding-right: 40px;
+        text-align: right;
+    }
+    .hito-tiempo:nth-child(even) {
+        left: 50%;
+        padding-left: 40px;
+        text-align: left;
+    }
+    .hito-tiempo:nth-child(odd) .punto-nodo {
+        left: auto;
+        right: -7px;
+    }
+    .hito-tiempo:nth-child(even) .punto-nodo {
+        left: -7px;
+    }
+}
